@@ -1,22 +1,38 @@
+// fetch the details from the database table
+
 <?php
 global $wpdb;
 $result = $wpdb->get_results ( "SELECT * FROM wp_refinedplants WHERE plant_place='Outdoor Plant'");
 $i=0;
 ?>
+
+// create a table
+
     <table class='tab'>
-        <?php foreach ( $result as $print )
+       
+// for each result       
+       
+       <?php foreach ( $result as $print )
         {
         
 if ($i%3==0){ ?>
+
+// create a table with 3 columns
+
 <tr> <td width='33%'></td> <td width='33%'></td> <td width='33%'></td></tr>
         <tr>
             <?php } ?>
             <td>
+
+// create a card with specific dimensions
+
 <div class="card" style="width: 30rem; height: 35rem; background-color: red">
 
 <div class="card-header" style="background-color: #b4f2a9">
    <h1><?php echo $print->comman_name;?></h1>
   </div>
+
+// content for the card to be filled in with the details from the database
 
 <li class="list-group-item" style="width: 100%">
   <span style= "color: #848484; font-family: 'Open Sans', sans-serif; font-size: 18px" > <?php echo $print->plant_type;?></span>
@@ -53,6 +69,9 @@ if ($i%3==0){ ?>
         $i++;
         } ?>
     </table>
+
+// css
+
 <style>
 
     table, th, td {
