@@ -1,0 +1,6 @@
+Take regular weekly backups of the Wordpress website.
+Take regular weekly backups of the database.
+Change the copyright's year every year.
+Check for yearly updates in data at the data sources.
+Update the database every year with new data if any.
+
