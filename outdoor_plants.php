@@ -26,7 +26,7 @@ if ($i%3==0){ ?>
 
 // create a card with specific dimensions
 
-<div class="card" style="width: 30rem; height: 35rem; background-color: red">
+<div class="card" style="width: 30rem; height: 35rem; background-color: white">
 
 <div class="card-header" style="background-color: #b4f2a9">
    <h1><?php echo $print->comman_name;?></h1>
