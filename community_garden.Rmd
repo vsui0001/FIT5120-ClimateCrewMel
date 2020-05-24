@@ -1,0 +1,82 @@
+---
+title: "Community Gardens"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(magrittr) #to improve readability and maintainability of code
+library(dplyr) #for data manipulation
+library(leaflet) #used to build web mapping applications
+library(webshot) #Takes screenshots of web pages
+library(leaflet.extras) #Add on to leaflet package
+library(leafpop) #Creates 'HTML' strings to embed tables
+```
+
+```{r}
+#Reading Dataset
+data <- read.csv(file="/../CommunityGardens_Latest.csv")
+```
+
+```{r}
+#Changing variable names
+data <- set_names(data, c("Garden_Name", "Garden_Type", "Garden_Website", "Public_Access", "Lat", "Long", "State", "Contact_Email"))
+```
+
+```{r}
+#To view dataframe
+View(data)
+```
+
+```{r}
+#importing green leaf icons as markers on map
+greenLeafIcon <- makeIcon(
+  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
+```
+
+```{r}
+#Generating map 
+map = leaflet(data) %>% addProviderTiles("Esri.WorldImagery", group = "ESRI World Imagery") %>% 
+  #using variables to display on map
+    addMarkers(lng = data$Long, lat = data$Lat, label = data$Garden_Name, group = "marker",icon = greenLeafIcon, clusterId = "cluster", 
+               popup = paste("Garden Name:", data$Garden_Name, "<br>",
+                             "Garden Type:", data$Garden_Type, "<br>",
+                               "Website:", data$Garden_Website, "<br>",
+                             "Public Access:", data$Public_Access, "<br>",
+                             "State:", data$State, "<br>",
+                             "Contact Email:", data$Contact_Email, "<br>"
+                             
+               ), clusterOptions = markerClusterOptions(removeOutsideVisibleBounds =  F),labelOptions = labelOptions(noHide = T, 
+                                                                                                                   direction = 'auto')) %>% addScaleBar() %>%  #scalebar to calculate distance between two points
+  setView(lng = 144.964600, lat = -37.020100, zoom = 6.5)%>%
+  addMeasure(position = "bottomleft",
+    primaryLengthUnit = "meters",
+    primaryAreaUnit = "sqmeters",
+    activeColor = "#3D535D",
+    completedColor = "#7D4479") %>%
+  addEasyButton(easyButton(
+    icon="fa-crosshairs", title="Locate Me", #to detect user's location
+    onClick=JS("function(btn, map){ map.locate({setView: true}); }")))
+```
+
+```{r}
+map <- inlmisc::AddHomeButton(map) #creating high-level graphics
+map <- inlmisc::AddSearchButton(map, group = "marker", zoom = 15, #Home Button to zoom in the map
+                                textPlaceholder = "Search Garden Names...") #searching garden names
+map <- inlmisc::AddClusterButton(map, clusterId = "cluster") #to disable and enable clustering
+```
