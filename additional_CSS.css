@@ -1,0 +1,67 @@
+/*Modify the colour of navigation bar */
+header#masthead{
+	background: rgb(60,179,113);
+}
+
+/*Modify the text colour of the navigation element while it is selected  */
+#masthead .main-navigation li.current-menu-item a {
+    color: #2f3640;
+}
+
+/*Keep the element of the navigation be in midle*/
+.main-navigation ul {
+    text-align: right;
+    margin: 10px;
+}
+/* navigation dropdown colour */
+.main-navigation ul ul {
+    background: rgb(60, 179, 113);
+}
+
+/** Start Envato Elements CSS: Garden Maintenance (18-3-d177ec65b42d6a429ffaf43a3da243c7) **/
+
+@media(min-width: 1025px) {
+  .envato-kit-15-background-fix {
+    -webkit-transform: translate3d(0,0,0);
+      transform: translate3d(0,0,0);
+  }
+}
+
+
+/** End Envato Elements CSS: Garden Maintenance (18-3-d177ec65b42d6a429ffaf43a3da243c7) **/
+
+
+
+/** Start Envato Elements CSS: House Cleaning Company (94-3-c465066d3b7120fd4db1686b38abc98d) **/
+
+.envato-kit-79-form .elementor-field-type-checkbox .elementor-field-option{
+	width: 25%;
+	padding: 3px;
+}
+.envato-kit-79-form .elementor-field-type-checkbox .elementor-field-option label{
+	vertical-align: top !important;
+}
+@media screen and (max-width: 460px){
+	.envato-kit-79-form .elementor-field-type-checkbox .elementor-field-option{
+		width: 50%;
+	}
+}
+
+.envato-kit-79-price-icon .elementor-price-list .elementor-price-list-image img{
+	width: 40px;
+ opacity: .3;
+}
+
+
+/** End Envato Elements CSS: House Cleaning Company (94-3-c465066d3b7120fd4db1686b38abc98d) **/
+
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
+html, body {
+
+  font-family: Abel, Arial, Verdana, sans-serif;
+}
+
+#bitnami-banner {display:none;}
+
+
